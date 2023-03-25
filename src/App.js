@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { BrowserRouter as Router,  Route, Routes } from "react-router-dom";
+import OwnerLoading from "./components/Owner/Loading/OwnerLoading";
+import Admin from "./routes/Admin";
+import Owner from "./routes/Owner";
+import User from "./routes/User";
+
 
 function App() {
+  // const [userLoading, setUserLoading] = useState(false)
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    {/* {userLoadingStatus && <OwnerLoading/> }  */}
+    
+    <Router>
+      <Routes>
+        <Route path="/*" element={<User />} />
+        <Route path="/admin/*" element={<Admin />} />
+        <Route path="/owner/*" element= {<Owner />} /> 
+      </Routes>
+    </Router>
+    </>
   );
 }
-
 export default App;
+
+
