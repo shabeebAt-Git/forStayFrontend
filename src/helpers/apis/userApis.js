@@ -19,10 +19,10 @@ export const registerUserApi = async (formData) => {
 };
 
 
-export const getHotelsUserApi = async ()=>{
+export const getHotelsUserApi = async (searchData)=>{
     try {
-        const {data} =await userApi.get("/getHotels")
-        // console.log(data);
+        console.log(searchData);
+        const {data} =await userApi.post("/getHotels?",{searchData})
         return data
     } catch (error) {
         return error
@@ -32,8 +32,10 @@ export const getHotelsUserApi = async ()=>{
 
 export const getHotelDataUserApi = async (hotelId)=>{
     try {
-        const {data} =await userApi.get(`/getHotelData/${hotelId}`)
-        // console.log(data);
+
+        const res =await userApi.get(`/getHotelData/${hotelId}`)
+        console.log(res)
+        const data = res.data 
         return data
     } catch (error) {
         return error
@@ -53,7 +55,7 @@ export const getRoomDataUserApi = async (datas)=>{
     }
 }
 
-export const informOwnerBookingOwnerApi = async (datas)=>{
+export const informOwnerBookingUserApi = async (datas)=>{
     try{
         const {data} = await userApi.post(`/informOwnerBooking`,{...datas})
         return data
@@ -62,7 +64,7 @@ export const informOwnerBookingOwnerApi = async (datas)=>{
     }
 }
 
-export const myBookingDataOwnerApi = async ()=>{
+export const myBookingDataUserApi = async ()=>{
     try{
         const {data} = await userApi.get('/myBookings')
         return data
@@ -82,4 +84,94 @@ export const getUserDataUserApi = async ()=>{
         return error
     }
 }
+
+
+export const orderPaymentUserApi = async (roomData)=>{
+    try{
+        // console.log(roomData);
+        const { data } = await userApi.post('/orders',roomData)
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const verifyPaymentUserApi = async (response)=>{
+    try{
+        // console.log(response);
+        const { data } = await userApi.post('/verify',{...response})
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const addReservedDateUserApi = async (roomAndOrderData)=>{
+    try{
+        // console.log(data);
+        const { data } = await userApi.post('/addReservedDate',{...roomAndOrderData})
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const placeSearchUserApi = async (searchData)=>{
+    try{
+        // console.log(place);
+        const { data } = await userApi.post('/serachPlace', {...searchData})
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const getHotelsByDistrict = async (place)=>{
+    try{
+        console.log(place);
+        const { data } = await userApi.get(`/hotelByDistrict/${place}`)
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const getAddressUserApi = async ()=>{
+    try{
+        const { data } = await userApi.get(`/address`)
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+export const hotelDistAndCountUserApi = async ()=>{
+    try{
+        const { data } = await userApi.get(`/hotelDistWithCount`)
+        return data
+    }
+    catch(error){
+        return error
+    }
+}
+
+
+
+
+
+
+
+
 

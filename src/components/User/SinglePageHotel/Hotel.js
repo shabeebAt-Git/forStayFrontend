@@ -183,17 +183,7 @@ const Hotel = () => {
                                         airport shuttle service.
                                     </p> */}
                         </div>
-                        <div className="hotelDetailsPrice mb-5">
-                            <h1>Perfect for a 9-night stay!</h1>
-                            <span>
-                                Located in the real heart of Krakow, this property has an
-                                excellent location score of 9.8!
-                            </span>
-                            <h2>
-                                {/* <b>$945</b> (9 nights) */}
-                            </h2>
-                            {/* <button>Reserve or Book Now!</button> */}
-                        </div>
+                       
                     </div>
                 </div> : ""}
 
@@ -204,61 +194,68 @@ const Hotel = () => {
                 {/* <Footer /> */}
             </div>
 
-            <div className=" border container mx-auto forRoomList">
-                <div className="p-5">
-                    <table class="table-auto w-full ">
-                        <thead class="text-xs font-semibold uppercase text-black 0 border-b border-black" >
-                            <tr>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Room Number</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Capacity</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-left">Room Type</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-center">Aminities</div>
-                                </th>
-                                <th class="p-2 whitespace-nowrap">
-                                    <div class="font-semibold text-center">Booking</div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-sm divide-y divide-gray-100 ">
-                            {rooms? rooms.map((room)=>{
-                                return(
-                                    <tr className="border-b ">
-                                        <td class="p-2 whitespace-nowrap">
-                                            <div class="flex items-center">
-                                                <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src={room.images[0]} width="40" height="40" alt="Alex Shatov" /></div>
-                                                <div class="font-medium text-gray-800">{room.roomNumber}</div>
-                                            </div>
-                                        </td>
-                                        <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left">{room.totalCapacity}</div>
-                                        </td>
-                                        <td class="p-2 whitespace-nowrap">
-                                            <div class="text-left font-medium ">{room.roomType}</div>
-                                        </td>
-                                        <td class="p-2 whitespace-nowrap">
-                                            <div class="text-lg text-center">{ room.aminities.map((a)=> a ) }</div>
-                                        </td>
-                                        <td class="p-2 whitespace-nowrap flex justify-center">
-                                            <div class="text-left font-medium ">
-                                                <Link to={`/room/${hotelId}/${room._id}`}>   <button className="border px-3 py-1 rounded-md bg-red-400">Book</button></Link>
-                                                </div>
-                                        </td>
+       {
+        rooms.length>0 ?   
+                    <div className=" border container mx-auto forRoomList">
+                        <div className="p-5">
+                            <table class="table-auto w-full ">
+                                <thead class="text-xs font-semibold uppercase text-black 0 border-b border-black" >
+                                    <tr>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-left">Room Number</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-left">Capacity</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-left">Room Type</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center">Aminities</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center">Booking</div>
+                                        </th>
                                     </tr>
-                                )
-                            }) : "No Hotels"}
-                           
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>  
+                                </thead>
+                                <tbody class="text-sm divide-y divide-gray-100 ">
+                                    {rooms ? rooms.map((room) => {
+                                        return (
+                                            <tr className="border-b ">
+                                                <td class="p-2 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src={room.images[0]} width="40" height="40" alt="Alex Shatov" /></div>
+                                                        <div class="font-medium text-gray-800">{room.roomNumber}</div>
+                                                    </div>
+                                                </td>
+                                                <td class="p-2 whitespace-nowrap">
+                                                    <div class="text-left">{room.totalCapacity}</div>
+                                                </td>
+                                                <td class="p-2 whitespace-nowrap">
+                                                    <div class="text-left font-medium ">{room.roomType}</div>
+                                                </td>
+                                                <td class=" whitespace-nowrap">
+                                                    <div class="text-lg text-center ">{room.aminities.map((a) => (
+                                                        <div className=" mt-1">
+                                                            {a}
+                                                        </div>
+                                                    ))}</div>
+                                                </td>
+                                                <td class="p-2 whitespace-nowrap flex justify-center">
+                                                    <div class="text-left font-medium ">
+                                                        <Link to={`/room/${hotelId}/${room._id}`}>   <button className="border px-3 py-1 rounded-md bg-red-400">Book</button></Link>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }) :  "No Hotels" }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> : <div className="container mx-auto "> No Rooms </div>  
+       }
                          
             
         </div>

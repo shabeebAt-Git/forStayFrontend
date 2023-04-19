@@ -11,9 +11,15 @@ import { object, string, number }from 'yup';
 
 
 import style from './FormToAddHotel.module.css'
+import { ToastContainer, toast } from 'react-toastify'
 
 
 const FormToAddHotel = () => {
+
+    const notify = (msg) => toast(msg);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const districtsOfKerala = ['Alappuzha', 'Ernakulam', 'Kozhikode', 'Palakkad', 'Kollam', 'Kannur',
         'Kasaragod', 'Idukki', 'Kottayam', 'Thrissur', 'Pathanamthitta', 'Malappuram', 'Wayanad', 'Thiruvananthapuram']
 
@@ -37,6 +43,8 @@ const FormToAddHotel = () => {
             pincode:number("Should be a number").required("Required").positive("No negatives")
         }),
         onSubmit: async (values) => {
+
+            dispatch(startLoading())
 
             const arrayOfImages = Array.from(receivedImages)
 
@@ -70,7 +78,12 @@ const FormToAddHotel = () => {
                 })
                 console.log(response);
 
-                navigate('/owner/hotels')
+                dispatch(endLoading())
+
+                notify("Room Added")
+
+                setTimeout(navigate('/owner/hotels'), 3000)
+                
             });
             console.log(values);
         }
@@ -98,11 +111,9 @@ const FormToAddHotel = () => {
 
 
 
-    const dispatch = useDispatch()
 
     // const userLoading = useSelector((state)=> state.userLoading  )
 
-    const navigate = useNavigate()
 
 
     return (
@@ -171,6 +182,19 @@ const FormToAddHotel = () => {
                     <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
                 </div>
             </form>
+
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </>
     )
 }

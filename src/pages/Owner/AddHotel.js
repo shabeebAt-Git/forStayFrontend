@@ -1,12 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import FormToAddHotel from '../../components/Owner/AddHotel/FormToAddHotel'
-import FormToAddHotels from '../../components/Owner/AddHotel/FormToAddHotels'
 import ContainerLayout from '../../components/Owner/BoilerPlate/ContainerLayout'
 import MainAreaOwner from '../../components/Owner/BoilerPlate/MainAreaOwner'
 import SidebarLeftOwner from '../../components/Owner/BoilerPlate/SidebarLeftOwner'
 import Header from '../../components/Owner/Header/Header'
-import OwnerLoading from '../../components/Owner/Loading/OwnerLoading'
+import Loading from '../../components/Common/Loader/Loading'
 
 
 
@@ -18,11 +17,8 @@ const AddHotel = () => {
   return (
     <div>
     {
-      userLoadingStatus ? (
-          <OwnerLoading />
-
-      ) : (
       <>
+      {userLoadingStatus && <Loading />}
               <Header />
 
               <ContainerLayout>
@@ -37,14 +33,8 @@ const AddHotel = () => {
                 </MainAreaOwner>
               </ContainerLayout>
       </>
-      ) 
-    } 
-
-
-
-
-
       
+    } 
 
     </div>
   )

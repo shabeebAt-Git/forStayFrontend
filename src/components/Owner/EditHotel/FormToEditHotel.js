@@ -3,11 +3,13 @@ import { useFormik } from 'formik';
 import style from './FormToEditHotel.module.css'
 import { deleteCurrentImgInEditOwnerApi, editHotelGetOwnerApi, editHotelPostOwnerApi } from '../../../helpers/apis/ownerApis';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InputImageCard from '../../Common/InputImg.js/InputImageCard';
 
 
 const FormToEditHotel = () => {
+
+  const navigate = useNavigate()
 
   const { hotelId } = useParams()
   const [hotelData, setHotelData] = useState()
@@ -18,6 +20,8 @@ const FormToEditHotel = () => {
   const editHotelDetailes = async () => {
     const response = await editHotelGetOwnerApi(hotelId)
     setHotelData(response[0])
+
+    
   }
 
   useEffect(() => {
@@ -80,6 +84,7 @@ const FormToEditHotel = () => {
           console.log(response);
 
           // navigate('/owner/hotels')
+          navigate('/owner/hotels')
         });
       } else {
         const { hotelName, city, contact, pincode, district, description } = values

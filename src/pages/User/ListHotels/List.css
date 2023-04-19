@@ -28,6 +28,21 @@
     color: Black;
     margin-bottom: 10px;
 }
+.forDropDown{
+    background-color:  white;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid gray;
+}
+
+.forDropDownRow{
+    height: 30px;
+    cursor: pointer;
+    text-align: start;
+    margin: 2px 0;
+    border: 1px solid white;
+    border-radius: 20px;
+}
 
 .lsItem {
     display: flex;
@@ -37,13 +52,13 @@
 }
 
 .lsItem>label {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .lsItem>input {
     border-radius: 5px;
-    height: 30px;
-    border: none;
+    height: 40px;
+    /* border: none; */
     padding: 5px;
 }
 

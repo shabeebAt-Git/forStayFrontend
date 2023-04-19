@@ -21,9 +21,9 @@ export const addHotelOwnerApi = async (formData) => {
 };
 
 
-export const getmyHotelsOwnerApi = async ()=>{
+export const getmyHotelsOwnerApi = async (page)=>{
     try {
-        const {data} = await ownerApi.get("/getMyHotels")
+        const {data} = await ownerApi.get(`/getMyHotels?page=${page}`)
         return data;
     } catch (error) {
             return error;
@@ -126,6 +126,59 @@ export const approveRoomOwnerApi = async (dataId)=>{
         return error
     }
 }
+
+
+
+export const bookedDetailsOwnerApi = async (dataId)=>{
+    try{
+        const { data } = await ownerApi.get(`/receivedBookingDetails/${dataId}`)
+        return data
+
+    }catch(error){
+        return error
+    }
+}
+
+export const deleteRoomOwnerApi = async (roomId) => {
+    try {
+        console.log(roomId);
+        const { data } = await ownerApi.post(`/deleteRoom/${roomId}`)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+export const editRoomGetOwnerApi = async (roomId) => {
+    try {
+        const { data } = await ownerApi.get(`/editRoomDetails/${roomId}`)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+
+export const getDashboardDataOwnerApi = async () => {
+    try {
+        const { data } = await ownerApi.get(`/dashboardData`)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+
+export const getAllBookingsOwnerApi = async () => {
+    try {
+        const { data } = await ownerApi.get(`/allBookings`)
+        return data
+    } catch (error) {
+        return error
+    }
+}
+
+
 
 
 

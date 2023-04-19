@@ -105,8 +105,8 @@
 .siCheckButton{
   background-color: rgb(239 68 68);
   color: white;
-  font-weight: bold;
-  padding: 10px 5px;
+  font-weight:normal;
+  padding: 8px 15px;
   border: none;
   cursor: pointer;
   border-radius: 5px;

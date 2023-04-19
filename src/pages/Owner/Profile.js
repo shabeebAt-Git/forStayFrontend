@@ -30,41 +30,7 @@ const Profile = () => {
       <ContainerLayout>
         <SidebarLeftOwner/>
         <MainAreaOwner>
-          {/* <div className='m-3'>
-            <h1 className='mt-4'>Profile</h1>
-            <div className=''>
-              <div className='flex w-5/6 mx-auto  mt-10'>
-                <div className='w-1/3 flex flex-col'>
-
-                  <img className='rounded-full w-96 h-96' src="https://img.freepik.com/premium-vector/avatar-profile-colorful-illustration-2_549209-82.jpg?w=2000" alt=" description" />
-
-                </div>
-                <div className='ml-10 w-2/3 border flex flex-col justify-around '>
-                  <h1 className=' font-medium text-3xl'>Name</h1>
-
-                  <div>
-                    <h3>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Placeat vero eum fugiat nihil eveniet officiis veniam ipsam voluptas nisi, at natus dicta sunt ut excepturi. Quaerat enim nisi voluptates praesentium!</h3>
-                    <h5 className='mt-8 '>Bio</h5>
-                  </div>
-                  <div className='flex justify-end'>
-                    <h6 className='place-self-end '>Created On</h6>
-                  </div>
-                </div>
-              </div>
-
-
-              <div className='border w-5/6 mx-auto mt-20'>
-                border
-              </div>
-            </div>
-
-          </div> */}
-
-
-
-          {/* <!-- component --> */}
-          {/* <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"> */}
-            {/* <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"> */}
+      
 
               
 

@@ -6,7 +6,6 @@ import { addUserDetailes } from '../../redux/slices/userAuth';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
-// import './Login.css'
 
 
 const Login = () => {
@@ -28,12 +27,10 @@ const Login = () => {
 
     const emailInputHandler = (e)=>{
         setEmail(e.target.value)
-        // console.log(email);
     }
 
     const passwordInputHandler = (e)=>{
         setPassword(e.target.value)
-        // console.log(email);
     }
     const [error, setError] = useState("");
 
@@ -46,7 +43,6 @@ const Login = () => {
             const response = await axios.post('http://localhost:8000/login',{
                 email,password
             });
-            // console.log(response.data);
 
             localStorage.setItem("userToken", response.data.userToken );
             localStorage.setItem("userName", response.data.userName);

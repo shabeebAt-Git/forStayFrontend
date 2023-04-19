@@ -7,7 +7,7 @@ import SearchItem from '../../../components/User/Dummy/searchItem/SearchItem';
 
 
 import './List.css'
-import { getHotelsUserApi } from '../../../helpers/apis/userApis';
+import { getHotelsByDistrict, getHotelsUserApi } from '../../../helpers/apis/userApis';
 
 
 
@@ -16,14 +16,36 @@ import { getHotelsUserApi } from '../../../helpers/apis/userApis';
 const HotelList = () => {
 
     const [allHotels,setAllHotels] = useState([])
+    const [searchValue,setSearchValue] = useState("")
+    const [district,setDistrict] = useState()
+    const [city,setCity] = useState()
+    const location = useLocation()
 
     const getHotelData = async ()=>{
-        const getHotels = await getHotelsUserApi()
+        const getHotels = await getHotelsUserApi(location.state)
         setAllHotels(getHotels)
-        // console.log(getHotels);
+        setSearchValue("")
+        console.log(getHotels);
+
+       const districtNames = getHotels.map((name)=>{
+        return (
+            name.district
+        )
+       })
+       const cityNames = getHotels.map((name)=>{
+        return (
+            name.district
+        )
+       })
+
+       setCity(cityNames)
+       setDistrict(districtNames)
+
+
     }
 
     useEffect(()=>{
+        console.log(location.state);
         getHotelData()
     },[])
 
@@ -35,93 +57,99 @@ const HotelList = () => {
     const [openDate, setOpenDate] = useState(false);
     // const [options, setOptions] = useState(location.state.options);
 
+    const searchValueChange = (event)=>{
+        setSearchValue(event.target.value)
+    }
+
+    const toSearch = async (theSearchValue)=>{
+        setSearchValue(theSearchValue)
+
+        const response = await getHotelsByDistrict(theSearchValue) 
+        console.log(response);
+
+        setAllHotels(response)
+
+        console.log(allHotels);
+    }
+
     return (
         <div>
             <Header/>
 
             <div className='listContainer'>
-                <div className='listWrapper container'>
+                <div className='listWrapper container flex flex-col md:flex-row'>
+
+                    <div className='md:hidden'>
+                        <div className='lsItem w-1/2 mx-auto'>
+                            <div className='flex justify-between'>
+                            <label htmlFor="" >Destination</label>
+                                <label htmlFor="" onClick={getHotelData}>All</label>
+
+                            </div>
+                            <input type="text" value={searchValue} className='border border-red-100' onChange={searchValueChange} />
+                        </div>
+                        {
+                            (allHotels && city && district) &&
+                            <div className='forDropDown w-1/2 mx-auto'>
+                                {
+                                    district.filter(item => {
+                                        const searchTerm = searchValue
+                                        const fullName = item.toLowerCase()
+                                        return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
+                                    }).slice(0, 5).map((item) => {
+                                        return (
+                                            <div onClick={() => toSearch(item)} className='forDropDownRow' key={item} >
+                                                {item}
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        }
+                    </div>
                    
-                    <div className='listResult'>
-                        {allHotels.length>0 ? allHotels.map((hotel) => <SearchItem key={hotel._id} hotelData={hotel} />) : "no Hotels"}
-                        {/* <SearchItem hotelData={hotel} /> */}
-                        {/* <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem />
-                        <SearchItem /> */}
+                    <div className='listResult '>
+                        {allHotels.length>0 ? allHotels.map((hotel) => <SearchItem key={hotel._id} hotelData={hotel} />) : <div> <h1> No Date to display</h1> </div>}
                     </div>
 
-                    <div className='listSearch'>
+                    
+
+                    <div className='listSearch hidden md:block'>
+                        <div className='flex justify-between'>
                         <h1 className='lsTitle'>Search</h1>
+                            <button className='border px-2 py-1 rounded-lg' onClick={getHotelData}>Show All</button>
+                        </div>
                         <div className='lsItem'>
                             <label htmlFor="">Destination</label>
-                            <input type="text" />
+                            <input type="text" value={searchValue} onChange={searchValueChange}  />
                         </div>
-                        {/* <div className='lsItem'>
-                            <label htmlFor="">Check-in Date</label>
-                            <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                                date[0].startDate,
-                                "MM/dd/yyyy"
-                            )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
-                            {openDate && (
-                                <DateRange
-                                    onChange={(item) => setDate([item.selection])}
-                                    minDate={new Date()}
-                                    ranges={date}
-                                />
-                            )}
-                        </div> */}
-                        <div className="lsItem">
-                            <label>Options</label>
-                            <div className="lsOptions">
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">
-                                        Min price <small>per night</small>
-                                    </span>
-                                    <input type="number" className="lsOptionInput" />
-                                </div>
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">
-                                        Max price <small>per night</small>
-                                    </span>
-                                    <input type="number" className="lsOptionInput" />
-                                </div>
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">Adult</span>
-                                    <input
-                                        type="number"
-                                        min={1}
-                                        className="lsOptionInput"
-                                    // placeholder={options.adult}
-                                    />
-                                </div>
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">Children</span>
-                                    <input
-                                        type="number"
-                                        min={0}
-                                        className="lsOptionInput"
-                                    // placeholder={options.children}
-                                    />
-                                </div>
-                                <div className="lsOptionItem">
-                                    <span className="lsOptionText">Room</span>
-                                    <input
-                                        type="number"
-                                        min={1}
-                                        className="lsOptionInput"
-                                    // placeholder={options.room}
-                                    />
-                                </div>
+                        {
+                            
+                            (allHotels && city && district) &&
+                            <div className='forDropDown absolute'>
+                                {
+                                    district.filter(item => {
+                                        const searchTerm = searchValue
+                                        const fullName = item.toLowerCase()
+                                        return searchTerm && fullName.startsWith(searchTerm) && fullName !== searchTerm
+                                    }).slice(0,5).map((item) => {
+                                        return(
+                                        <div onClick={()=>toSearch(item)} className='forDropDownRow' key={item} >
+                                            {item}
+                                        </div>
+                                        )
+                                    })
+
+                                    // allHotels.filter(item=>{
+                                    //     return(
+
+                                    //         console.log(item)
+                                    //     )
+                                    // })
+                                    
+                                    }
                             </div>
-                        </div>
-                        <button>Search</button>
+                        }
                     </div>
 
                 </div>

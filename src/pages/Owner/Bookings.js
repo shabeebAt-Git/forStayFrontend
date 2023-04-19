@@ -6,9 +6,11 @@ import Header from '../../components/Owner/Header/Header'
 import { approveRoomOwnerApi, bookingPendingOwnerApi } from '../../helpers/apis/ownerApis'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom'
 
 const Bookings = () => {
     const notify = (msg) => toast(msg);
+    const navigate = useNavigate()
 
     const [pending, setPending] = useState([])
 
@@ -28,20 +30,9 @@ const Bookings = () => {
         getPending()
     }, [])
 
+    const seeBookingDetails = (dataId)=>{
 
-
-
-
-    const approveRoom = async (dataId)=>{
-        const response = await approveRoomOwnerApi(dataId)
-        if(response.message){
-            notify(response.message)
-
-            setPending((prev)=>{
-                return prev.filter((item)=>item.id !== dataId)
-            })
-        }
-        console.log(response);
+        navigate(`/owner/receivedBooking/${dataId}`)
     }
 
     return (
@@ -83,8 +74,8 @@ const Bookings = () => {
                                                     {data.roomId.roomNumber}
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <button className='border px-3 py-1 rounded-md bg-green-400' onClick={()=>approveRoom(data._id)} >Approve</button>
-                                                        <button className='border px-3 py-1 rounded-md ml-2 bg-blue-300' >See Details</button>
+                                                    {/* <button className='border px-3 py-1 rounded-md bg-green-400' onClick={()=>approveRoom(data._id)} >Approve</button> */}
+                                                        <button className='border px-3 py-1 rounded-md ml-2 bg-blue-300' onClick={()=>seeBookingDetails(data._id)} >See Details</button>
                                                 </td>
 
                                             </tr>

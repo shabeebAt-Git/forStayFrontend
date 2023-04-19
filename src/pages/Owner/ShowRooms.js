@@ -26,6 +26,13 @@ const ShowRooms = () => {
 
   }
 
+  const roomRemoved = (deletedId) =>{
+    console.log("Evide");
+      setRoom((prev)=>{
+        return prev.filter((room)=>room._id !== deletedId)
+      })
+  }
+
 
   useEffect(() => {
     getRoomData()
@@ -60,7 +67,7 @@ const ShowRooms = () => {
                       </div>
                     :"" }
                 
-                    <ShowRoomTable room={room} />
+                    <ShowRoomTable room={room} toRemoveRoom={roomRemoved} />
 
                 </div>
               </MainAreaOwner>
