@@ -37,7 +37,7 @@ const Login = () => {
         event.preventDefault()
 
         try {
-            const response = await axios.post('http://localhost:8000/admin/login', {
+            const response = await axios.post('https://storedecor.shop/admin/login', {
                 email, password
             });
             // console.log(response.data);
