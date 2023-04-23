@@ -44,7 +44,7 @@ const Login = () => {
     try {
       setLoading(true)
 
-      const response = await axios.post('http://localhost:8000/owner/login', {
+      const response = await axios.post('https://storedecor.shop/owner/login', {
         email, password
       });
       // console.log(response.data);
