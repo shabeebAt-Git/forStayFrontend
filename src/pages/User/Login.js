@@ -40,7 +40,7 @@ const Login = () => {
 
 
         try {
-            const response = await axios.post('https://storedecor.shop/login',{
+            const response = await axios.post('https://impossible-smock-fly.cyclic.app/login',{
                 email,password
             });
 
