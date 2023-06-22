@@ -4,7 +4,7 @@ import ContainerLayout from '../../components/Admin/BoilerPlate/ContainerLayout'
 import SidebarLeftAdmin from '../../components/Admin/BoilerPlate/SidebarLeftAdmin'
 import MainAreaAdmin from '../../components/Admin/BoilerPlate/MainAreaAdmin'
 import { getAllOwnersAdminApi } from '../../helpers/apis/adminApis'
-import OwnerBlockUnblock from '../../components/Admin/OwnerBlockUnBlock/OwnerBlockUnblock'
+// import OwnerBlockUnblock from '../../components/Admin/OwnerBlockUnBlock/OwnerBlockUnblock'
 import ListOwnerAndUser from '../../components/Admin/ListOwnerAndUser/ListOwnerAndUser'
 
 const Owners = () => {

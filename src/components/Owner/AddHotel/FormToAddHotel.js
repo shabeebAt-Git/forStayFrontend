@@ -39,8 +39,12 @@ const FormToAddHotel = () => {
             imageUrls: []
         },
         validationSchema: object({
-            hotelName:string().required("Required"),
-            pincode:number("Should be a number").required("Required").positive("No negatives")
+            hotelName: string().required("Required").trim("Space not allowed"),
+            pincode:number("Should be a number").required("Required").positive("No negatives"),
+            city: string().required("Required").trim("Space not allowed"),
+            contact: number("Number").required("Required"),
+            district: string().required("Required").trim("Space not allowed"),
+            description: string().required("Required").trim("Space not allowed"),
         }),
         onSubmit: async (values) => {
 

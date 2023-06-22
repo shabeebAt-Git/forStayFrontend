@@ -9,6 +9,8 @@ import Loading from '../../Common/Loader/Loading';
 import { useDispatch } from 'react-redux';
 import { startLoading } from '../../../redux/slices/userLoading';
 import { endLoading } from '../../../redux/slices/userLoading';
+import { object, string, number } from 'yup';
+
 
 const FormToAddRoom = () => {
 
@@ -44,6 +46,15 @@ const FormToAddRoom = () => {
       imageUrls: []
 
     },
+    validationSchema: object({
+      hotelName: string().required("Required").trim("Space not allowed"),
+      pincode: number("Should be a number").required("Required").positive("No negatives"),
+      city: string().required("Required").trim("Space not allowed"),
+      contact: number("Number").required("Required"),
+      district: string().required("Required").trim("Space not allowed"),
+      description: string().required("Required").trim("Space not allowed"),
+    }),
+    
     onSubmit: async (values) => {
       // setLoading(true)
 

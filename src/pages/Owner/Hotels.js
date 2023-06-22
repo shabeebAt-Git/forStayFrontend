@@ -37,7 +37,7 @@ const Hotels = () => {
     getHotels()
 
 
-  }, [page,limit,total,myHotels])
+  }, [page,limit,total])
 
 
   const deleteHotel = async () => {

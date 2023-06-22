@@ -25,7 +25,7 @@ const VerifyEmail = () => {
     }, [param]);
   return (
       <div> {validUrl ? (
-          <div >
+          <div className='mx-auto flex justify-center items-center container'>
               <h1>Email verified successfully</h1>
               <Link to="/login">
                   <button >Login</button>

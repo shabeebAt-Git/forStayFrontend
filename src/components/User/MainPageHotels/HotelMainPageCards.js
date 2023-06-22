@@ -2,17 +2,27 @@ import React from 'react'
 import { useEffect } from 'react'
 import { getHotelsUserApi } from '../../../helpers/apis/userApis'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 
 const HotelMainPageCards = () => {
-    const [allHotels, setAllHotels] = useState([])
+    const [allHotels, setAllHotels] = useState(null)
+
+    const navigate = useNavigate()
+    const toBlockUser = (data) => {
+        if (data.logHimOut) {
+            localStorage.removeItem("userName")
+            localStorage.removeItem("userToken")
+            navigate('/login')
+        }
+    }
 
 
     useEffect(() => {
         const getAllHotels = async () => {
             const response = await getHotelsUserApi()
+            toBlockUser(response)
             setAllHotels(response)
         }
 
@@ -25,11 +35,11 @@ const HotelMainPageCards = () => {
     return (
 
 
-        <div className='flex flex-col md:flex-row mx-auto container justify-start flex-wrap gap-4 ' >
+        <div className='flex flex-col md:flex-row mx-auto container justify-center flex-wrap gap-4 ' >
 
-            {allHotels.length > 0 && allHotels.map((hotel) => {
+            {allHotels?.map((hotel) => {
                 return (
-                    <Link to={`/hotel/${hotel._id}`}>
+                    <Link to={`/hotel/${hotel._id}`} key={hotel._id}>
                         <div className='border rounded-xl drop-shadow-2xl ' style={{ backgroundColor: "#ffffff" }} key={hotel._id}>
                             <div className=' w-full md:w-64  px-2 py-2'>
                                 <div className='relative overflow-hidden h-60 rounded-lg'>
@@ -47,6 +57,10 @@ const HotelMainPageCards = () => {
                     </Link>
                 )
             })}
+
+            {!allHotels && <div> Loading Data ......</div>
+
+            }
 
 
 

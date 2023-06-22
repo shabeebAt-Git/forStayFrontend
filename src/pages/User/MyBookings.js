@@ -18,11 +18,20 @@ const MyBookings = () => {
     const [bookingDataApprovalPending, setBookingDataApprovalPending] = useState()
     const [allBookingData, setAllBookingData] = useState()
 
+    // console.log(bookings);
 
+    const notDeleted = bookings?.filter((data) => {
+        return (
+            data.hotelId.status && data.roomId.status
+        )
+    })
+
+    console.log(notDeleted);
 
 
     const getMyBookings = async () => {
         const response = await myBookingDataUserApi()
+
         setBookingDataApprovalPending(response.bookingDataApprovalPending)
         setBookingDataPaymentPending(response.bookingDataPaymentPending)
         setAllBookingData(response.bookingData)
@@ -38,6 +47,7 @@ const MyBookings = () => {
         getMyBookings()
     }, [])
 
+    console.log(bookingDataPaymentPending?.bookingDataPaymentPending );
 
 
 

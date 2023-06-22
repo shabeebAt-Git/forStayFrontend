@@ -44,17 +44,24 @@ const Login = () => {
     try {
       setLoading(true)
 
-      const response = await axios.post('http://localhost:8000/owner/login', {
+      const ownerLoginUrl = `${process.env.REACT_APP_USER_BASE_URL}/owner/login'`
+
+      const response = await axios.post(ownerLoginUrl, {
         email, password
       });
       // console.log(response.data);
+      if (response.data.logHimOut) {
+        toast("Owner is Blocked")
+        // navigate("/");
+      } else {
       localStorage.setItem("ownerToken", response.data.ownerToken);
       localStorage.setItem("ownerName", response.data.ownerName);
       localStorage.setItem("ownerId", response.data.ownerId);
       // dispatch(addUserDetailes(response.data))
       setLoading(false)
-
       navigate("/owner");
+      }
+
     } catch (error) {
       console.error(error);
       if (

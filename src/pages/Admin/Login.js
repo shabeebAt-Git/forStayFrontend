@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addUserDetailes } from '../../redux/slices/userAuth';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 const Login = () => {
@@ -37,15 +39,22 @@ const Login = () => {
         event.preventDefault()
 
         try {
-            const response = await axios.post('http://localhost:8000/admin/login', {
+            const adminLoginUrl = `${process.env.REACT_APP_USER_BASE_URL}/admin/login'`
+
+            const response = await axios.post(adminLoginUrl, {
                 email, password
             });
-            // console.log(response.data);
-            localStorage.setItem("adminToken", response.data.adminToken);
-            localStorage.setItem("adminName", response.data.adminName);
-            // dispatch(addUserDetailes(response.data))
 
-            navigate("/admin");
+            if (response.data.logHimOut) {
+                toast("Admin is Blocked")
+                // navigate("/");
+            }else{
+                localStorage.setItem("adminToken", response.data.adminToken);
+                localStorage.setItem("adminName", response.data.adminName);
+                navigate("/admin");
+            }
+         
+
         } catch (error) {
             console.error(error);
             if (
@@ -90,6 +99,18 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
     )
 }

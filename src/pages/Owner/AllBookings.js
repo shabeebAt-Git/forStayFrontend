@@ -6,21 +6,28 @@ import MainAreaOwner from '../../components/Owner/BoilerPlate/MainAreaOwner'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { getAllBookingsOwnerApi } from '../../helpers/apis/ownerApis'
+import { useNavigate } from 'react-router-dom'
 
 const AllBookings = () => {
     const [bookings, setBookings] = useState()
+    const navigate = useNavigate()
 
 
 
     useEffect(() => {
         const getAllOwners = async () => {
             const response = await getAllBookingsOwnerApi()
+            if(response.logHimOut){
+                localStorage.removeItem("ownerName")
+                localStorage.removeItem("ownerToken")
+                navigate('/owner/login')
+            }
             console.log(response);
             setBookings(response)
         }
 
         getAllOwners()
-    }, [bookings])
+    }, [])
 
     function addingZero(date) {
         let dateParts = date.split("/"); // split the date part into month, day, and year

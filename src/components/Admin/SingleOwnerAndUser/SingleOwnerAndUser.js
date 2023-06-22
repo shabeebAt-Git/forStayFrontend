@@ -23,7 +23,7 @@ const SingleOwnerAndUser = ({owner,user}) => {
             // console.log(owner);
         }
         if(user){
-            setActive(user.verified)
+            setActive(user.adminApproval)
 
             // console.log(user);
         }

@@ -37,15 +37,15 @@ const BookingDetailForm = ({ startDate, endDate }) => {
             saveAddress:""
 
         },
-        validationSchema: object({
-            name: string().required("Required").trim("Space not allowed"),
-            email: string().required("Required").email("Email"),
-            address: string().required("Required"),
-            state: string().required("Required"),
-            city: string().required("Required"),
-            zipcode: number().required("Required"),
+        // validationSchema: object({
+        //     name: string().required("Required").trim("Space not allowed"),
+        //     email: string().required("Required").email("Email"),
+        //     address: string().required("Required").trim(),
+        //     state: string().required("Required").trim(),
+        //     city: string().required("Required").trim(),
+        //     zipcode: number().required("Required").trim(),
             
-        }),
+        // }),
 
         onSubmit: async (values) => {
             console.log(values);

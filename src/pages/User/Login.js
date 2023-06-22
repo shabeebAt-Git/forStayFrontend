@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addUserDetailes } from '../../redux/slices/userAuth';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { loginUserApi } from '../../helpers/apis/userApis';
 
 
 
@@ -40,16 +41,27 @@ const Login = () => {
 
 
         try {
-            const response = await axios.post('http://localhost:8000/login',{
+            console.log("Here");
+            
+            const loginUrl = `${process.env.REACT_APP_USER_BASE_URL}/login`
+            console.log(loginUrl);
+
+            const response = await axios.post(loginUrl,{
                 email,password
             });
 
-            localStorage.setItem("userToken", response.data.userToken );
-            localStorage.setItem("userName", response.data.userName);
-            dispatch(addUserDetailes(response.data))
-            setLoading(false)
-
-            navigate("/");
+            if (response.data.logHimOut){
+                toast("User is Blocked")
+                setLoading(false)
+                // navigate("/");
+            }else{
+                localStorage.setItem("userToken", response.data.userToken);
+                localStorage.setItem("userName", response.data.userName);
+                dispatch(addUserDetailes(response.data))
+                setLoading(false)
+                navigate("/");
+            }
+            
         } catch (error) {
             console.error(error);
             if (
@@ -94,7 +106,7 @@ const Login = () => {
                     </div>
                     <div className='hidden lg:flex items-center justify-center 0 w-2/3 loginBG '>
                         {/* <img src="./assets/pexels-pixabay-271639.jpg" alt="" className="" /> */}
-                        <h2 className='text-black'><Link to={'/'}>forStay</Link></h2>
+                        {/* <h2 className='text-black'><Link to={'/'}>forStay</Link></h2> */}
                     </div>
                 </div>
             </div>

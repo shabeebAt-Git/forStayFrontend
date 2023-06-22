@@ -40,8 +40,9 @@ const Register = () => {
 
     try {
       setLoading(true)
+      const ownerRegisterUrl = `${process.env.REACT_APP_USER_BASE_URL}/owner/register'`
 
-      const response = await axios.post('http://localhost:8000/owner/register', {
+      const response = await axios.post(ownerRegisterUrl, {
         email, password, name
       });
       console.log(response.message);

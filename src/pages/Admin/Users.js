@@ -3,8 +3,8 @@ import Header from '../../components/Admin/Header/Header'
 import ContainerLayout from '../../components/Admin/BoilerPlate/ContainerLayout'
 import SidebarLeftAdmin from '../../components/Admin/BoilerPlate/SidebarLeftAdmin'
 import MainAreaAdmin from '../../components/Admin/BoilerPlate/MainAreaAdmin'
-import { blockUserAdminApi, getAllUsersAdminApi, unBlockUserAdminApi } from '../../helpers/apis/adminApis'
-import BlockUnblock from '../../components/Admin/UserBlockingUnblocking/BlockUnblock'
+import { getAllUsersAdminApi,  } from '../../helpers/apis/adminApis'
+// import BlockUnblock from '../../components/Admin/UserBlockingUnblocking/BlockUnblock'
 import ListOwnerAndUser from '../../components/Admin/ListOwnerAndUser/ListOwnerAndUser'
 
 const Users = () => {

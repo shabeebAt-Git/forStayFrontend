@@ -4,7 +4,6 @@ import React from 'react'
 import { useState } from 'react';
 import { DateRange } from 'react-date-range';
 import { useNavigate } from 'react-router-dom';
-import { placeSearchUserApi } from '../../../helpers/apis/userApis';
 
 
 const Search = () => {

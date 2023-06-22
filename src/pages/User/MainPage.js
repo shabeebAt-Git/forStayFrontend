@@ -32,14 +32,11 @@ const MainPage = () => {
           <Search />
         </div>
 
-        {/* <div className=' mx-auto  container my-10'>
-            <PlaceCards/>
-          </div> */}
-
-
         <div className='mx-auto   pb-10 ' style={{ backgroundColor: "#f2f2f2" }}>
+          <div className='container mx-auto flex justify-center'> 
 
-          <h1 className=' font-semibold text-3xl  pt-32 pb-10 container mx-auto' style={{ color: "#54B435" }}>HOTELS</h1>
+          <h1 className=' font-semibold text-3xl  pt-32 pb-20  ' style={{ color: "#54B435" }}>HOTELS</h1>
+            </div>
 
           <HotelMainPageCards />
         </div>

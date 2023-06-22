@@ -5,13 +5,21 @@ import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { getHotelsUserApi } from '../../helpers/apis/userApis'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import UserFooter from '../../components/User/Footer/UserFooter'
 
 const ListHotels = () => {
   const [allHotels, setAllHotels] = useState([])
   const location = useLocation()
 
+  const navigate = useNavigate()
+  const toBlockUser = (data) => {
+    if (data.logHimOut) {
+      localStorage.removeItem("userName")
+      localStorage.removeItem("userToken")
+      navigate('/login')
+    }
+  }
 
 
   useEffect(() => {
@@ -21,12 +29,14 @@ const ListHotels = () => {
     if(searchDatas){
       const getAllHotelsWithSearch = async () => {
         const response = await getHotelsUserApi(searchDatas.place)
+        toBlockUser(response)
         setAllHotels(response)
       }
       getAllHotelsWithSearch()
     }else{
       const getAllHotels = async () => {
         const response = await getHotelsUserApi()
+        toBlockUser(response)
         setAllHotels(response)
       }
       getAllHotels()
