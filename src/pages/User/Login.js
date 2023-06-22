@@ -42,11 +42,11 @@ const Login = () => {
 
         try {
             console.log("Here");
-            
+
             const loginUrl = `${process.env.REACT_APP_USER_BASE_URL}/login`
             console.log(loginUrl);
 
-            const response = await axios.post(loginUrl,{
+            const response = await axios.post(loginUrl, {
                 email,password
             });
 
