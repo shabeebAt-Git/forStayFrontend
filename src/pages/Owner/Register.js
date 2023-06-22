@@ -40,7 +40,7 @@ const Register = () => {
 
     try {
       setLoading(true)
-      const ownerRegisterUrl = `${process.env.REACT_APP_USER_BASE_URL}/owner/register'`
+      const ownerRegisterUrl = `${process.env.REACT_APP_OWNER_BASE_URL}/register'`
 
       const response = await axios.post(ownerRegisterUrl, {
         email, password, name

@@ -44,7 +44,7 @@ const Login = () => {
     try {
       setLoading(true)
 
-      const ownerLoginUrl = `${process.env.REACT_APP_USER_BASE_URL}/owner/login'`
+      const ownerLoginUrl = `${process.env.REACT_APP_OWNER_BASE_URL}/login'`
 
       const response = await axios.post(ownerLoginUrl, {
         email, password

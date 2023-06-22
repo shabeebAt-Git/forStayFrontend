@@ -39,7 +39,7 @@ const Login = () => {
         event.preventDefault()
 
         try {
-            const adminLoginUrl = `${process.env.REACT_APP_USER_BASE_URL}/admin/login'`
+            const adminLoginUrl = `${process.env.REACT_APP_ADMIN_BASE_URL}/login'`
 
             const response = await axios.post(adminLoginUrl, {
                 email, password
